@@ -10,5 +10,13 @@ export const TaskRow = props => (
         onChange={() => props.toggleTask(props.task)}
       />
     </td>
+    <td>
+      <div
+        className='btn btn-danger'
+        onClick={() => props.deleteTask(props.task)}
+      >
+        x
+      </div>
+    </td>
   </tr>
 );
