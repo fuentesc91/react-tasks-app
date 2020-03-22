@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### 'About this project'
+
+This project is intented to show the skills developer with React, noted the use of React Hooks, specifically UseState and UseEffect. This project save the content in local storage for practical uses, but a connection with a back-end is simple to implement.
+
 ## Available Scripts
 
 In the project directory, you can run:

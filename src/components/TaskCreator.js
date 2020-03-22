@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+// TODO give a better design to task creator
+
 export const TaskCreator = props => {
   const [newTaskName, setNewTaskName] = useState('');
 
