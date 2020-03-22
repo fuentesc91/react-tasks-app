@@ -13,14 +13,15 @@ export const TaskCreator = props => {
   };
 
   return (
-    <div className='my-1'>
+    <div className='m-2 d-flex align-items-center justify-content-start'>
       <input
         type='text'
         className='form-control'
+        placeholder='New task name'
         value={newTaskName}
         onChange={updateNewTaskValue}
       />
-      <button className='btn btn-primary mt-1' onClick={createNewTask}>
+      <button className='btn btn-primary mx-2' onClick={createNewTask}>
         Add
       </button>
     </div>

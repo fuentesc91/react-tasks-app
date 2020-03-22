@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { Tasks } from './components/Tasks';
 import { TaskRow } from './components/TaskRow';
 import { TaskBanner } from './components/TaskBanner';
 import { TaskCreator } from './components/TaskCreator';
-import { VisibilityControl } from './components/VisibilityControl';
 
 function App() {
   // React Hooks
 
   // useState definitions
-  const [userName, setUserName] = useState('carlos');
+  const [userName, setUserName] = useState('');
   const [taskItems, setTaskItems] = useState([]);
   const [showCompleted, setShowCompleted] = useState(true);
 
@@ -16,28 +16,14 @@ function App() {
   // load that data, if it is not, give default example values
   useEffect(() => {
     let data = localStorage.getItem('tasks');
+    let user = localStorage.getItem('user');
     if (data != null) {
       setTaskItems(JSON.parse(data));
+      setUserName(user);
     } else {
-      setUserName('Carlos Example');
-      setTaskItems([
-        {
-          name: 'Task One Example',
-          done: false
-        },
-        {
-          name: 'Task Two Example',
-          done: false
-        },
-        {
-          name: 'Task Three Example',
-          done: true
-        },
-        {
-          name: 'Task Four Example',
-          done: false
-        }
-      ]);
+      user = window.prompt('Welcome, please set your User Name', 'User');
+      setUserName(user);
+      setTaskItems([]);
       setShowCompleted(true);
     }
   }, []);
@@ -45,7 +31,8 @@ function App() {
   // Every tome TaskItems changes, save on local storage the info
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(taskItems));
-  }, [taskItems]);
+    localStorage.setItem('user', userName);
+  }, [taskItems, userName]);
 
   // Methods
   const createNewTask = taskName => {
@@ -79,6 +66,14 @@ function App() {
         />
       ));
 
+  const noTaskToDo = () => {
+    if (taskItems.filter(t => t.done === false).length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   // XML
   return (
     <div>
@@ -86,39 +81,23 @@ function App() {
 
       <TaskCreator callback={createNewTask} />
 
-      {/* Table for Tasks to do */}
-      <table className='table table-striped table-bordered'>
-        <thead>
-          <tr>
-            <th>Description</th>
-            <th>Done</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>{taskTableRows(false)}</tbody>
-      </table>
-
-      {/* Visibility Control Component */}
-      <div className='bg-secondary text-white text-center'>
-        <VisibilityControl
-          description='Completed Tasks'
-          isChecked={showCompleted}
-          callback={checked => setShowCompleted(checked)}
+      {taskItems.length ? (
+        <Tasks
+          showCompleted={showCompleted}
+          taskTableRows={taskTableRows}
+          setShowCompleted={setShowCompleted}
+          noTaskToDo={noTaskToDo}
         />
-      </div>
-
-      {/* Table to show task completed */}
-      {showCompleted && (
-        <table className='table table-striped table-bordered'>
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Done</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>{taskTableRows(true)}</tbody>
-        </table>
+      ) : (
+        <div className='jumbotron jumbotron-fluid'>
+          <div className='container'>
+            <h1 className='display-4'>Add a new task!</h1>
+            <p className='lead'>
+              To start using your task app, the first thing to do is add a new
+              task on the input up here =D
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );
