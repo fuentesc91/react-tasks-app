@@ -6,7 +6,7 @@ export const Tasks = props => {
   return (
     <div>
       {/* Table to show to do tasks */}
-      {props.noTaskToDo() ? (
+      {props.anyTask(false) ? (
         <table className='table table-striped table-bordered'>
           <thead>
             <tr>
@@ -39,17 +39,29 @@ export const Tasks = props => {
       </div>
 
       {/* Table to show task completed */}
-      {props.showCompleted && (
-        <table className='table table-striped table-bordered'>
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Done</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>{props.taskTableRows(true)}</tbody>
-        </table>
+      {props.anyTask(true) ? (
+        <div>
+          {props.showCompleted && (
+            <table className='table table-striped table-bordered'>
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Done</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>{props.taskTableRows(true)}</tbody>
+            </table>
+          )}
+        </div>
+      ) : (
+        <div>
+          {props.showCompleted && (
+            <div className='alert alert-info' role='alert'>
+              There are any completed task (let's be more productive)
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

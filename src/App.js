@@ -17,9 +17,11 @@ function App() {
   useEffect(() => {
     let data = localStorage.getItem('tasks');
     let user = localStorage.getItem('user');
+    let show = localStorage.getItem('show');
     if (data != null) {
       setTaskItems(JSON.parse(data));
       setUserName(user);
+      setShowCompleted(JSON.parse(show));
     } else {
       user = window.prompt('Welcome, please set your User Name', 'User');
       setUserName(user);
@@ -32,7 +34,8 @@ function App() {
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(taskItems));
     localStorage.setItem('user', userName);
-  }, [taskItems, userName]);
+    localStorage.setItem('show', JSON.stringify(showCompleted));
+  }, [taskItems, userName, showCompleted]);
 
   // Methods
   const createNewTask = taskName => {
@@ -66,8 +69,8 @@ function App() {
         />
       ));
 
-  const noTaskToDo = () => {
-    if (taskItems.filter(t => t.done === false).length > 0) {
+  const anyTask = type => {
+    if (taskItems.filter(t => t.done === type).length > 0) {
       return true;
     } else {
       return false;
@@ -86,7 +89,7 @@ function App() {
           showCompleted={showCompleted}
           taskTableRows={taskTableRows}
           setShowCompleted={setShowCompleted}
-          noTaskToDo={noTaskToDo}
+          anyTask={anyTask}
         />
       ) : (
         <div className='jumbotron jumbotron-fluid'>
