@@ -1,4 +1,5 @@
 import React from 'react';
+import Octicon, { getIconByName } from '@primer/octicons-react';
 
 export const TaskRow = props => (
   <tr key={props.task.name}>
@@ -12,10 +13,10 @@ export const TaskRow = props => (
     </td>
     <td>
       <div
-        className='btn btn-danger'
+        className='btn btn-link text-danger'
         onClick={() => props.deleteTask(props.task)}
       >
-        x
+        <Octicon icon={getIconByName('diff-removed')} />
       </div>
     </td>
   </tr>

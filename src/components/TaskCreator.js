@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Octicon, { getIconByName } from '@primer/octicons-react';
 
 // TODO give a better design to task creator
 
@@ -29,7 +30,7 @@ export const TaskCreator = props => {
         onKeyUp={validateKey}
       />
       <button className='btn btn-primary mx-2' onClick={createNewTask}>
-        Add
+        <Octicon icon={getIconByName('diff-added')} />
       </button>
     </div>
   );
