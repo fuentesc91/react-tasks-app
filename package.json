@@ -1,6 +1,6 @@
 {
-  "name": "taskapp",
-  "version": "0.1.0",
+  "name": "react-tasks-app",
+  "version": "1.0.0",
   "private": true,
   "engines": {
     "npm": "6.13.7",
