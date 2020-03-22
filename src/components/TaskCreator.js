@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Octicon, { getIconByName } from '@primer/octicons-react';
 
 // TODO give a better design to task creator
 
@@ -12,16 +13,24 @@ export const TaskCreator = props => {
     setNewTaskName('');
   };
 
+  const validateKey = e => {
+    if (e.key === 'Enter') {
+      createNewTask();
+    }
+  };
+
   return (
-    <div className='my-1'>
+    <div className='m-2 d-flex align-items-center justify-content-start'>
       <input
         type='text'
         className='form-control'
+        placeholder='New task name'
         value={newTaskName}
         onChange={updateNewTaskValue}
+        onKeyUp={validateKey}
       />
-      <button className='btn btn-primary mt-1' onClick={createNewTask}>
-        Add
+      <button className='btn btn-primary mx-2' onClick={createNewTask}>
+        <Octicon icon={getIconByName('diff-added')} />
       </button>
     </div>
   );
