@@ -12,6 +12,12 @@ export const TaskCreator = props => {
     setNewTaskName('');
   };
 
+  const validateKey = e => {
+    if (e.key === 'Enter') {
+      createNewTask();
+    }
+  };
+
   return (
     <div className='m-2 d-flex align-items-center justify-content-start'>
       <input
@@ -20,6 +26,7 @@ export const TaskCreator = props => {
         placeholder='New task name'
         value={newTaskName}
         onChange={updateNewTaskValue}
+        onKeyUp={validateKey}
       />
       <button className='btn btn-primary mx-2' onClick={createNewTask}>
         Add

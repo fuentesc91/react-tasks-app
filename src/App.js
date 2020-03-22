@@ -57,6 +57,12 @@ function App() {
     }
   };
 
+  const editUser = () => {
+    const newUser = window.prompt('Please write the new user', userName);
+    if (newUser) {
+      setUserName(newUser);
+    }
+  };
   const taskTableRows = doneValue =>
     taskItems
       .filter(task => task.done === doneValue)
@@ -80,7 +86,11 @@ function App() {
   // XML
   return (
     <div>
-      <TaskBanner userName={userName} taskItems={taskItems} />
+      <TaskBanner
+        userName={userName}
+        taskItems={taskItems}
+        editUser={editUser}
+      />
 
       <TaskCreator callback={createNewTask} />
 
