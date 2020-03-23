@@ -30,7 +30,7 @@ export const Tasks = props => {
       )}
 
       {/* Visibility Control Component */}
-      <div className='bg-secondary text-white text-center'>
+      <div className='bg-light text-secondary text-center'>
         <VisibilityControl
           description='Completed Tasks'
           isChecked={props.showCompleted}

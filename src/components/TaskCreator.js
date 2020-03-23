@@ -24,7 +24,7 @@ export const TaskCreator = props => {
       <input
         type='text'
         className='form-control'
-        placeholder='New task name'
+        placeholder='Add new task'
         value={newTaskName}
         onChange={updateNewTaskValue}
         onKeyUp={validateKey}
